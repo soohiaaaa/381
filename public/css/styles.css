@@ -1,0 +1,17 @@
+body {
+  background-color: #f5f6fa;
+}
+
+.filter-card {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+table td,
+table th {
+  vertical-align: middle;
+}
+
+

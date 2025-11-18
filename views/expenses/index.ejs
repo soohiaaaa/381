@@ -1,0 +1,88 @@
+<%- include('../partials/header') %>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h2>Your expenses</h2>
+      <p class="text-muted mb-0">Search, filter, and manage your spending.</p>
+    </div>
+    <a class="btn btn-primary" href="/expenses/new">+ Add expense</a>
+  </div>
+
+  <form class="row g-3 filter-card mb-4" method="GET">
+    <div class="col-md-3">
+      <label class="form-label">Category</label>
+      <select class="form-select" name="category">
+        <option value="All" <%= (!filters.category || filters.category === 'All') ? 'selected' : '' %>>
+          All
+        </option>
+        <% ['Food','Transport','Shopping','Bills','Entertainment','Other'].forEach(cat => { %>
+        <option value="<%= cat %>" <%= filters.category === cat ? 'selected' : '' %>><%= cat %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Min amount</label>
+      <input type="number" step="0.01" class="form-control" name="minAmount" value="<%= filters.minAmount || '' %>" />
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Max amount</label>
+      <input type="number" step="0.01" class="form-control" name="maxAmount" value="<%= filters.maxAmount || '' %>" />
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">From date</label>
+      <input type="date" class="form-control" name="fromDate" value="<%= filters.fromDate || '' %>" />
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">To date</label>
+      <input type="date" class="form-control" name="toDate" value="<%= filters.toDate || '' %>" />
+    </div>
+    <div class="col-12">
+      <button class="btn btn-outline-primary me-2" type="submit">Apply filters</button>
+      <a class="btn btn-outline-secondary" href="/expenses">Clear</a>
+    </div>
+  </form>
+
+  <% if (!expenses.length) { %>
+  <div class="alert alert-info">No expenses found. Try a different filter or add your first expense.</div>
+  <% } else { %>
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Note</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% expenses.forEach(expense => { %>
+        <tr>
+          <td><%= expense.title %></td>
+          <td><span class="badge bg-secondary"><%= expense.category %></span></td>
+          <td>$<%= expense.amount.toFixed(2) %></td>
+          <td><%= expense.date ? expense.date.toISOString().slice(0,10) : '' %></td>
+          <td><%= expense.note || '-' %></td>
+          <td class="text-end">
+            <a class="btn btn-sm btn-outline-primary me-2" href="/expenses/<%= expense._id %>/edit"
+              >Edit</a
+            >
+            <form
+              method="POST"
+              action="/expenses/<%= expense._id %>?_method=DELETE"
+              class="d-inline"
+              onsubmit="return confirm('Delete this expense?');"
+            >
+              <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+<%- include('../partials/footer') %>
+
+

@@ -1,0 +1,9 @@
+<%- include('../partials/header') %>
+  <h2 class="mb-3">Add expense</h2>
+  <% if (error) { %>
+  <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+  <%- include('form', { action: '/expenses', method: 'POST', expense, submitLabel: 'Create' }) %>
+<%- include('../partials/footer') %>
+
+

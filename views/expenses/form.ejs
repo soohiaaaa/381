@@ -1,0 +1,53 @@
+<% const categories = ['Food','Transport','Shopping','Bills','Entertainment','Other']; %>
+<form method="POST" action="<%= action %>" novalidate>
+  <% if (method && method !== 'POST') { %>
+  <input type="hidden" name="_method" value="<%= method %>" />
+  <% } %>
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      name="title"
+      value="<%= expense.title || '' %>"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Amount</label>
+    <input
+      type="number"
+      min="0"
+      step="0.01"
+      class="form-control"
+      name="amount"
+      value="<%= expense.amount || '' %>"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Category</label>
+    <select class="form-select" name="category">
+      <% categories.forEach(cat => { %>
+      <option value="<%= cat %>" <%= expense.category === cat ? 'selected' : '' %>><%= cat %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Date</label>
+    <input
+      type="date"
+      class="form-control"
+      name="date"
+      value="<%= expense.date ? expense.date.toISOString().slice(0,10) : '' %>"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Note</label>
+    <textarea class="form-control" name="note" rows="3"><%= expense.note || '' %></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit"><%= submitLabel %></button>
+  <a class="btn btn-secondary ms-2" href="/expenses">Cancel</a>
+</form>
+
+
