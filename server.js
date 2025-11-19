@@ -8,9 +8,9 @@ const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 
-const authRoutes = require('./src/routes/auth');
-const expenseRoutes = require('./src/routes/expenses');
-const apiRoutes = require('./src/routes/api');
+const authRoutes = require('./routes/auth');
+const expenseRoutes = require('./routes/expenses');
+const apiRoutes = require('./routes/api');
 
 const app = express();
 
