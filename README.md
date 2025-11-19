@@ -1,9 +1,11 @@
 ## how to run the code
+
+```bash
 git clone https://github.com/soohiaaaa/381.git
 cd 381
 npm install
 cp .env.example .env
-
+```
  第 5 步：只改这一行！把下面这一整行替换成你自己的 Atlas 地址
  （没有 Atlas？去 https://cloud.mongodb.com 免费注册 3 分钟就有）
 nano .env    ← 粘贴你的 Atlas 连接字符串 → Ctrl+O → 回车 → Ctrl+X
