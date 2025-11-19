@@ -26,7 +26,7 @@ mongoose
   });
 
 // ----- View engine setup -----
-const viewsPath = path.join(__dirname, 'src', 'views');
+const viewsPath = path.join(__dirname, 'views');
 app.set('views', viewsPath);
 app.set('view engine', 'ejs');
 
@@ -34,7 +34,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
-app.use(express.static(path.join(__dirname, 'src', 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
 
 // ----- Session -----
